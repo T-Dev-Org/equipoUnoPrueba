@@ -1,0 +1,26 @@
+name: build
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+
+jobs:
+  build:
+    runs-on:
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4.2.1
+
+        - name: Setup Java JDK
+          uses: actions/setup-java@v4.4.0
+
+        - name: Build with Gradle
+          uses: gradle/actions@v4.1.0
+
+        - name: Upload a Build Artifact
+          uses: actions/upload-artifact@v4.4.3
+          with:
+            name: equipoUnoPrueba.apk
+            path: app/build/outputs/apk/app-debug.apk
